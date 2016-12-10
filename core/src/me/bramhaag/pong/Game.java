@@ -64,7 +64,7 @@ public class Game implements ApplicationListener {
     }
 
     @Override
-    public void resize(@Nonnull int width, @Nonnull int height) {
+    public void resize(int width, int height) {
 
     }
 

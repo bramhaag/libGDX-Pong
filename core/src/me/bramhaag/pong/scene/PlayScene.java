@@ -1,12 +1,12 @@
 package me.bramhaag.pong.scene;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import me.bramhaag.pong.Game;
+import me.bramhaag.pong.entity.Wall;
 import me.bramhaag.pong.input.GameKey;
+import me.bramhaag.pong.ui.DottedLine;
+import me.bramhaag.pong.ui.Score;
 
 import javax.annotation.Nonnull;
 
@@ -15,31 +15,39 @@ import javax.annotation.Nonnull;
  */
 public class PlayScene extends Scene {
 
-    private FreeTypeFontGenerator generator;
-    private FreeTypeFontGenerator.FreeTypeFontParameter parameter;
+    private Wall wallLeft;
+    private Wall wallRight;
 
-    private BitmapFont font;
+    private Score scoreLeft;
+    private Score scoreRight;
+
+    private DottedLine middleLine;
 
     public PlayScene(SpriteBatch batch) {
         super(batch);
 
-        generator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/Scream.ttf"));
-        parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
+        wallLeft = new Wall(100, (Game.HEIGHT - Wall.HEIGHT) / 2);
+        wallRight = new Wall(Game.WIDTH - 100, (Game.HEIGHT - Wall.HEIGHT) / 2);
 
-        parameter.size = 150;
+        middleLine = new DottedLine(Game.WIDTH / 2, (Game.HEIGHT - Wall.HEIGHT) / 2);
 
-        font = generator.generateFont(parameter);
+        scoreLeft = new Score((Game.WIDTH / 2) - 100,Game.HEIGHT - 100, getBatch());
+        scoreRight = new Score((Game.WIDTH / 2) + 100,Game.HEIGHT - 100, getBatch());
     }
 
     @Override
     public void render() {
-        final GlyphLayout layout = new GlyphLayout(font, "Play");
-        font.draw(getBatch(), layout, (Game.WIDTH - layout.width)/2, Game.HEIGHT - 500);
+        wallLeft.draw(new ShapeRenderer());
+        wallRight.draw(new ShapeRenderer());
+
+        middleLine.draw(new ShapeRenderer());
+
+        scoreLeft.draw(new ShapeRenderer());
+        scoreRight.draw(new ShapeRenderer());
     }
 
     @Override
     public void dispose() {
-        font.dispose();
     }
 
     @Override
