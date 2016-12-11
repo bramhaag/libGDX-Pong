@@ -23,7 +23,7 @@ public class DottedLine extends UIObject {
         int yOffset = (Game.HEIGHT % HEIGHT) / 2;
 
         for(int posY = 0; posY < Math.floor(Game.HEIGHT / HEIGHT); posY++) {
-            sr.rectLine(x, (posY * HEIGHT) + yOffset, x, (posY * HEIGHT) + HEIGHT, WIDTH);
+            sr.rectLine(x - (WIDTH / 2), (posY * HEIGHT) + yOffset, x - (WIDTH / 2), (posY * HEIGHT) + HEIGHT, WIDTH);
         }
 
         sr.end();

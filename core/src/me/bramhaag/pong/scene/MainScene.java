@@ -47,6 +47,8 @@ public class MainScene extends Scene {
 
     @Override
     public void render() {
+        getBatch().begin();
+
         TITLE_FONT.draw(getBatch(), TITLE_LAYOUT, (Game.WIDTH - TITLE_LAYOUT.width) / 2, Game.HEIGHT - 200);
 
         timeState += Gdx.graphics.getDeltaTime();
@@ -56,6 +58,8 @@ public class MainScene extends Scene {
         } else if(timeState > 1.3f) {
             timeState = 0f;
         }
+
+        getBatch().end();
 
     }
 

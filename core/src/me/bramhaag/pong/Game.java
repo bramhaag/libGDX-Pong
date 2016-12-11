@@ -30,7 +30,6 @@ public class Game implements ApplicationListener {
 	@Override
 	public void create() {
         camera = new OrthographicCamera(WIDTH, HEIGHT);
-        camera.translate(WIDTH /2, HEIGHT / 2);
         camera.update();
 
         batch = new SpriteBatch();
@@ -46,12 +45,8 @@ public class Game implements ApplicationListener {
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL30.GL_COLOR_BUFFER_BIT);
 
-		batch.begin();
-
         sceneHandler.render();
-
-        batch.end();
-	}
+    }
 
     @Override
     public void pause() {

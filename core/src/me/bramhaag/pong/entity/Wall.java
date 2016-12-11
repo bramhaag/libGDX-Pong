@@ -19,8 +19,8 @@ public class Wall extends Entity {
 
     @Override
     public void draw(ShapeRenderer sr) {
-        sr.setColor(Color.WHITE);
         sr.begin(ShapeRenderer.ShapeType.Filled);
+        sr.setColor(Color.WHITE);
         sr.rect(x, y, WIDTH, HEIGHT);
         sr.end();
     }
