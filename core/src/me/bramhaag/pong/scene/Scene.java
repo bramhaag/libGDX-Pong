@@ -19,6 +19,7 @@ public abstract class Scene {
     public abstract void render();
     public abstract void dispose();
 
+    public abstract void onKeyPress(@Nonnull GameKey key);
     public abstract void onKeyDown(@Nonnull GameKey key);
     public abstract void onKeyUp(@Nonnull GameKey key);
 

@@ -27,6 +27,9 @@ public class Game implements ApplicationListener {
     @Nonnull
 	private SpriteBatch batch;
 
+    @Nonnull
+    private InputHandler inputHandler;
+
 	@Override
 	public void create() {
         camera = new OrthographicCamera(WIDTH, HEIGHT);
@@ -37,7 +40,8 @@ public class Game implements ApplicationListener {
         sceneHandler = new SceneHandler(batch);
         sceneHandler.switchScene(MainScene.class);
 
-        Gdx.input.setInputProcessor(new InputHandler());
+        inputHandler = new InputHandler();
+        Gdx.input.setInputProcessor(inputHandler);
     }
 
     @Override

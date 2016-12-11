@@ -1,5 +1,6 @@
 package me.bramhaag.pong.scene;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import me.bramhaag.pong.Game;
@@ -30,7 +31,7 @@ public class PlayScene extends Scene {
     private DottedLine middleLine;
 
     //Score test code
-    //private double score = 0;
+    private double score = 0;
 
     public PlayScene(SpriteBatch batch) {
         super(batch);
@@ -43,8 +44,8 @@ public class PlayScene extends Scene {
 
         middleLine = new DottedLine(Game.WIDTH / 2, (Game.HEIGHT - Wall.HEIGHT) / 2);
 
-        scoreLeft = new Score((Game.WIDTH / 2) - 100,Game.HEIGHT - 100, Side.LEFT, getBatch());
-        scoreRight = new Score((Game.WIDTH / 2) + 100,Game.HEIGHT - 100, Side.RIGHT, getBatch());
+        scoreLeft = new Score(-100, -100, Side.LEFT, getBatch());
+        scoreRight = new Score(100, -100, Side.RIGHT, getBatch());
     }
 
     @Override
@@ -62,6 +63,12 @@ public class PlayScene extends Scene {
 
         getBatch().end();
 
+        //TODO implement a method to the InputHandler to be able to do such things
+        if(Gdx.input.isKeyPressed(GameKey.DOWN.getKeyCode()) && !Gdx.input.isKeyPressed(GameKey.UP.getKeyCode()))
+            wallLeft.move(wallLeft.x,wallLeft.y - (Gdx.graphics.getDeltaTime() * wallLeft.SPEED));
+        else if(Gdx.input.isKeyPressed(GameKey.UP.getKeyCode()) && !Gdx.input.isKeyPressed(GameKey.DOWN.getKeyCode()))
+            wallLeft.move(wallLeft.x,wallLeft.y + (Gdx.graphics.getDeltaTime() * wallLeft.SPEED));
+
         wallLeft.draw(renderer);
         wallRight.draw(renderer);
 
@@ -71,6 +78,12 @@ public class PlayScene extends Scene {
     @Override
     public void dispose() {
         renderer.dispose();
+    }
+
+    @Override
+    public void onKeyPress(@Nonnull GameKey key) {
+        /*if(key == GameKey.DOWN)
+            wallLeft.move(wallLeft.x, wallLeft.y-1);*/
     }
 
     @Override

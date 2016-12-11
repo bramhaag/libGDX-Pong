@@ -12,8 +12,8 @@ public enum GameKey {
     PAUSE(Input.Keys.ESCAPE),
     SPACE(Input.Keys.SPACE),
 
-    LEFT(Input.Keys.LEFT),
-    RIGHT(Input.Keys.RIGHT);
+    UP(Input.Keys.UP),
+    DOWN(Input.Keys.DOWN);
 
     private int keyCode;
 

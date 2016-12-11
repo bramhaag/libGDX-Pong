@@ -70,6 +70,11 @@ public class MainScene extends Scene {
     }
 
     @Override
+    public void onKeyPress(@Nonnull GameKey key) {
+
+    }
+
+    @Override
     public void onKeyDown(@Nonnull GameKey key) {
         if(key == GameKey.SPACE) {
             Game.sceneHandler.switchScene(PlayScene.class);

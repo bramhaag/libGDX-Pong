@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import me.bramhaag.pong.Game;
 import me.bramhaag.pong.util.Side;
 
 /**
@@ -25,8 +26,10 @@ public class Score extends UIObject {
 
     private Side side;
 
-    public Score(int x, int y, Side side, SpriteBatch batch) {
-        super(x, y);
+    private int xOffset;
+
+    public Score(int xOffset, int yOffset, Side side, SpriteBatch batch) {
+        super((Game.WIDTH / 2) + xOffset, Game.HEIGHT + yOffset);
 
         this.batch = batch;
 
@@ -37,8 +40,12 @@ public class Score extends UIObject {
         scoreFont = generator.generateFont(parameter);
         scoreLayout = new GlyphLayout(scoreFont, String.valueOf(score));
 
-        if(side == Side.RIGHT)
+        this.side = side;
+        this.xOffset = xOffset;
+
+        if(this.side == Side.LEFT) {
             this.x = x - (int)scoreLayout.width;
+        }
     }
 
     public int getScore() {
@@ -46,19 +53,11 @@ public class Score extends UIObject {
     }
 
     public void updateScore(int score) {
-        //TODO adjust x if side == LEFT && score >= 10
-
-        //Restore x to it's original value
-        if(side == Side.RIGHT) {
-            this.x = x + (int)scoreLayout.width;
-        }
-
         this.score = score;
-        scoreLayout = new GlyphLayout(scoreFont, String.valueOf(score));
+        scoreLayout = new GlyphLayout(scoreFont, String.valueOf(this.score));
 
-        //Adjust x to be symmetrical with the left side
-        if(side == Side.RIGHT) {
-            this.x = x - (int)scoreLayout.width;
+        if(side == Side.LEFT) {
+            this.x = (Game.WIDTH / 2) - (int)scoreLayout.width + xOffset;
         }
     }
 
